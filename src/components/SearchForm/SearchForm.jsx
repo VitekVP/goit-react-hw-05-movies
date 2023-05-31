@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FcSearch } from 'react-icons/fc';
 
 import { SForm, SearchFormButton, SearchFormInput } from './SearchForm.styled';
 
 export const SearchForm = ({ onSubmit }) => {
-  const [query, setQuery] = useState('');
+  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get('query') ?? '');
 
   const handleInputChange = event => {
     //   console.log(event.target.value);
@@ -20,7 +22,7 @@ export const SearchForm = ({ onSubmit }) => {
       return;
     }
     onSubmit(query);
-    setQuery('');
+    // setQuery('');
   };
 
   return (
